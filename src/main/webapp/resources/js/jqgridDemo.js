@@ -36,7 +36,7 @@ $(document).ready(function(){
         ],
         height: 200,
         jsonReader : {
-        	root:'list',
+        	root:'result',
         	repeatitems: false
         },
         pager: '#pager',

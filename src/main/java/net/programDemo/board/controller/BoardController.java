@@ -213,7 +213,7 @@ public class BoardController {
 //		) {
 		
 		List<BoardVo> list = boardService.jqGridList();
-		model.addAttribute("list", list);
+		model.addAttribute("result", list);
 		
 		
 		
