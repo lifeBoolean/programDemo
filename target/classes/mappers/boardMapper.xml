@@ -76,14 +76,17 @@
     </select>
     
     <select id="selectJqList" resultType="net.programDemo.board.model.BoardVo" >
-		SELECT * 
+		SELECT FREEBOD.IDX,
+		        FREEBOD.TITLE,
+		        FREEBOD.WRITER,
+		        FREEBOD.REGDATE,
+		        FREEBOD.HIT
 		FROM (
 		    SELECT FREEBOARD.*,
-		    		ROW_NUMBER() OVER(ORDER BY IDX DESC) RNUM 
+		        ROW_NUMBER() OVER(ORDER BY IDX ASC) RNUM 
 		    FROM FREEBOARD
 		    WHERE 1=1		    	
 		    ) FREEBOD
-		WHERE RNUM BETWEEN 11 AND 20
 	</select>
 
 </mapper>

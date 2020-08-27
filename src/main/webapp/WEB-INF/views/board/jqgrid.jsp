@@ -23,9 +23,12 @@
 	<h3>jqgrid 데모1</h3>
 
 	<div class="row">
-        <table id="jqGrid"></table>
-        <div id="jqGridPager"></div>    
+        <table id="list"></table>
+        <div id="pager"></div>
     </div>
+    
+    
+    
     
     
 

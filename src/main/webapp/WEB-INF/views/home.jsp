@@ -47,7 +47,7 @@
 	<a href="${pageContext.request.contextPath}/jsonDemo/thisme">JSON</a><br>
 	<a href="${pageContext.request.contextPath}/jsonForm">JSON 테스트입력</a><br>
 	<a href="${pageContext.request.contextPath}/jsonView">JSON View</a><br>
-	<a href="${pageContext.request.contextPath}/jqgrid">jqgrid</a><br>
+	<a href="${pageContext.request.contextPath}/board/jqgrid">jqgrid</a><br>
 	
 
 </body>
