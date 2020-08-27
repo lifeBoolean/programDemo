@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="boardMapper">
+
+	<insert id="insert" parameterType="net.programDemo.board.model.BoardVo" useGeneratedKeys="true" keyProperty="idx">
+		<selectKey keyProperty="idx" resultType="int" order="BEFORE">
+	    	SELECT FREEBOARD_SEQ.NEXTVAL FROM DUAL
+	    </selectKey>
+		INSERT INTO FREEBOARD (IDX, TITLE, WRITER, CONTENT, REGDATE, HIT)
+		VALUES (#{idx}, #{title}, #{writer}, #{content}, SYSDATE, 0)
+	</insert>
+	
+	<select id="list" resultType="net.programDemo.board.model.BoardVo" parameterType="net.programDemo.board.model.Pagination">
+		SELECT * 
+		FROM (
+		    SELECT FREEBOARD.*,
+		    		ROW_NUMBER() OVER(ORDER BY IDX DESC) RNUM 
+		    FROM FREEBOARD
+		    WHERE 1=1
+		    	<include refid="search"></include>
+		    ) FREEBOD
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+	</select>
+	
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM FREEBOARD
+		WHERE 1=1
+			<include refid="search"></include>
+	</select>
+	
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'title'.toString()">AND TITLE LIKE '%' || #{keyword} || '%'</if> 
+			<if test="searchType == 'writer'.toString()">AND WRITER LIKE '%' || #{keyword} || '%'</if> 
+			<if test="searchType == 'content'.toString()">AND CONTENT LIKE '%' || #{keyword} || '%'</if> 
+		</if>
+	</sql>
+	
+	<select id="read" resultType="net.programDemo.board.model.BoardVo">
+		SELECT * FROM FREEBOARD WHERE IDX = #{idx}
+	</select>
+	
+	<update id="update" parameterType="net.programDemo.board.model.BoardVo">
+		UPDATE FREEBOARD SET 
+			TITLE = #{title},
+			WRITER = #{writer},
+			CONTENT = #{content}
+		WHERE IDX = #{idx}
+	</update>
+	
+	<insert id="insertFile" parameterType="hashMap">
+		INSERT INTO FREEBOARD_FILES(
+			FILE_NO,
+			IDX,
+			ORG_FILE_NAME,
+			STORED_FILE_NAME,
+			FILE_SIZE
+		)VALUES(
+			SEQ_FREEBOARD_FILES_NO.NEXTVAL,
+			#{IDX},
+			#{ORG_FILE_NAME},
+			#{STORED_FILE_NAME},
+			#{FILE_SIZE}
+		)
+    </insert>
+    
+    <select id="selectFileList" parameterType="int" resultType="hashMap">
+    	SELECT FILE_NO, ORG_FILE_NAME, ROUND(FILE_SIZE/1024, 1) AS FILE_SIZE
+    	FROM FREEBOARD_FILES
+    	WHERE IDX = #{idx}
+    	AND DEL_GB = 'N'    	
+    </select>
+    
+    <select id="selectJqList" resultType="net.programDemo.board.model.BoardVo" >
+		SELECT * 
+		FROM (
+		    SELECT FREEBOARD.*,
+		    		ROW_NUMBER() OVER(ORDER BY IDX DESC) RNUM 
+		    FROM FREEBOARD
+		    WHERE 1=1		    	
+		    ) FREEBOD
+		WHERE RNUM BETWEEN 11 AND 20
+	</select>
+
+</mapper>

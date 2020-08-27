@@ -1,0 +1,26 @@
+label{cursor:pointer;}
+.h24{
+	font-size: 24px;
+}
+.wrap{
+	margin: 0 auto;
+	width: 800px;
+	/* border: 1px solid red; */
+}
+.wrap dl>dt{
+	float: left;
+}
+.wrap dl>dt{
+	width: 100px;
+	border: 1px solid #B4B4B4;
+}
+.asd ul>li {
+	display:inline-block;
+	border:1px solid red;
+	padding: 10px;
+	border:1px solid #B4B4B4;	
+}
+.ftRedColor {
+	color : red;
+	font-weight: bold;
+} 
