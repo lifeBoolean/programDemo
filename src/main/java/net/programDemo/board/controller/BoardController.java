@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -198,14 +199,65 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/jqgrid", method = RequestMethod.GET)
-	public String jqGrid() throws Exception {
+	public String jqGrid(Model model) throws Exception {
+		
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("sectKey", "ziptae.com");
+		jsonObject.put("email", "thisme@daum.net");
+		
+		JSONObject jObj = new JSONObject();
+		jObj.put("name", "강호동");
+		jObj.put("gender", "여자");
+		jObj.put("age", 35);
+		jObj.put("address", "서울");
+		
+		jsonObject.put("rows", jObj);
+		String json = jsonObject.toJSONString();
+		
+		System.out.println("jObj: " + jObj);
+		System.out.println("jsonObject: " + jsonObject);
+		System.out.println("json: " + json);
+		
+		String jj = (String) jsonObject.get("email");
+		Object oobj = jsonObject.get("rows");
+		
+		JSONParser parser = new JSONParser();
+//		JSONObject ooobj = (JSONObject)parser.parse(jsonObject);
+		JSONObject obj = (JSONObject) parser.parse(jsonObject);
+		
+//		JSONObject outer = new JSONObject();
+//		outer.put("inf", jObj);
+//		
+//		System.out.println("inf: " + jObj);
+//		
+//		String json = outer.toJSONString();
+//		System.out.println("json: " + json);
+//		
+//		System.out.println("========================================");
+//		
+//		JSONParser parser = new JSONParser();
+//		
+//		JSONObject obj = (JSONObject) parser.parse(json);
+//		JSONObject inf = (JSONObject) obj.get("inf");
+//		
+//		System.out.println("JSONparser: " + json);
+//		
+//		String name = (String) inf.get("name");
+//		String gender = (String) inf.get("gender");
+//		String age = (String) inf.get("age");
+//		String address = (String) inf.get("address");
+//		
+//		System.out.println("name" + name);
+//		System.out.println("gender" + gender);
+//		System.out.println("age" + age);
+//		System.out.println("address" + address);
 		
 		return "/board/jqgrid";
 	}
 	
 	@RequestMapping(value = "/viewGrid", method = RequestMethod.POST)
 	@ResponseBody
-	public List<BoardVo> viewGrid(BoardVo boardVo, Model model) throws Exception {
+	public void viewGrid(BoardVo boardVo, Model model) throws Exception {
 //	public String jqgrid(HttpServletRequest request, HttpServletResponse response) throws Exception {
 //		@RequestParam(value = "page", required=false) String page,//page : 몇번째 페이지를 요청했는지
 //		@RequestParam(value = "rows", required=false) String rows,//rows : 페이지 당 몇개의 행이 보여질건지
@@ -213,14 +265,17 @@ public class BoardController {
 //		@RequestParam(value = "sord", required=false) String sord//sord : 내림차순 또는 오름차순
 //		) {
 		
-		List<BoardVo> list = boardService.jqGridList();
+//		System.out.println("+++++++++========================================++++++++++");
+//		List<BoardVo> list = boardService.jqGridList();		
+//		System.out.println("list: " + list);
+//		JSONObject oList = new JSONObject();
+//		oList.put("rows", list);
+//		String sendJson = oList.toJSONString(); 
+//		
+//		System.out.println("rowsJson: " + sendJson);
 		
-		JsonObj obj = null;
-		obj.setRows(list);
 		
-		
-		
-		return list;
+//		return list;
 		
 //		JSONObject jsonObject = new JSONObject();            // Json 데이터를 담을 객체들 생성
 //        JSONArray cell = new JSONArray();
