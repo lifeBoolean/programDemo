@@ -208,27 +208,37 @@ public class BoardController {
 		JSONObject jObj = new JSONObject();
 		jObj.put("name", "강호동");
 		jObj.put("gender", "여자");
-		jObj.put("age", 35);
+		jObj.put("age", "35");
 		jObj.put("address", "서울");
 		
 		jsonObject.put("rows", jObj);
-		String json = jsonObject.toJSONString();
+		String outer = jsonObject.toJSONString();		
 		
-		System.out.println("jObj: " + jObj);
 		System.out.println("jsonObject: " + jsonObject);
-		System.out.println("json: " + json);
-		
-		String jj = (String) jsonObject.get("email");
-		Object oobj = jsonObject.get("rows");
+		System.out.println("jObj: " + jObj);
+		System.out.println("outer: " + outer);
 		
 		JSONParser parser = new JSONParser();
-//		JSONObject ooobj = (JSONObject)parser.parse(jsonObject);
-		JSONObject obj = (JSONObject) parser.parse(jsonObject);
+		JSONObject obj = (JSONObject)parser.parse(outer);
+		JSONObject rows = (JSONObject)obj.get("rows");
+		String sectKey = (String) obj.get("sectKey");
+		String email = (String) obj.get("email");
 		
-//		JSONObject outer = new JSONObject();
-//		outer.put("inf", jObj);
+		String name = (String) rows.get("name");
+		String gender = (String) rows.get("gender");
+		String age = (String) rows.get("age");
+		String address = (String) rows.get("address");
+		
+		System.out.println("obj: " + obj);
+		System.out.println("sectKey : " + sectKey);
+		System.out.println("email : " + email);
+		System.out.println("rows : " + rows);
+		System.out.println("name" + name);
+		System.out.println("gender" + gender);
+		System.out.println("age" + age);
+		System.out.println("address" + address);
 //		
-//		System.out.println("inf: " + jObj);
+		
 //		
 //		String json = outer.toJSONString();
 //		System.out.println("json: " + json);
@@ -242,11 +252,14 @@ public class BoardController {
 //		
 //		System.out.println("JSONparser: " + json);
 //		
+//		String userName = (String) obj.get("userName");		
 //		String name = (String) inf.get("name");
 //		String gender = (String) inf.get("gender");
 //		String age = (String) inf.get("age");
 //		String address = (String) inf.get("address");
 //		
+//		System.out.println("inf: " + inf);
+//		System.out.println("userName: " + userName);
 //		System.out.println("name" + name);
 //		System.out.println("gender" + gender);
 //		System.out.println("age" + age);
