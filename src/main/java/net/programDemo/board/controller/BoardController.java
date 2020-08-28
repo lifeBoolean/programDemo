@@ -36,6 +36,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import net.programDemo.board.model.BoardVo;
 import net.programDemo.board.model.Pagination;
 import net.programDemo.board.service.BoardServiceImpl;
+import net.programDemo.common.model.JsonObj;
 import net.programDemo.util.FileUtils;
 
 
@@ -213,7 +214,9 @@ public class BoardController {
 //		) {
 		
 		List<BoardVo> list = boardService.jqGridList();
-		model.addAttribute("result", list);
+		
+		JsonObj obj = null;
+		obj.setRows(list);
 		
 		
 		
