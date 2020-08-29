@@ -37,6 +37,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import net.programDemo.board.model.BoardVo;
 import net.programDemo.board.model.Pagination;
 import net.programDemo.board.service.BoardServiceImpl;
+import net.programDemo.common.model.JsonAdd;
 import net.programDemo.common.model.JsonObj;
 import net.programDemo.util.FileUtils;
 
@@ -201,42 +202,118 @@ public class BoardController {
 	@RequestMapping(value = "/jqgrid", method = RequestMethod.GET)
 	public String jqGrid(Model model) throws Exception {
 		
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("sectKey", "ziptae.com");
-		jsonObject.put("email", "thisme@daum.net");
+		JsonAdd jsonAdd = new JsonAdd();
+		jsonAdd.jsonGet();
+		System.out.println("json: " + jsonAdd.json);
 		
-		JSONObject jObj = new JSONObject();
-		jObj.put("name", "강호동");
-		jObj.put("gender", "여자");
-		jObj.put("age", "35");
-		jObj.put("address", "서울");
+//		JSONParser parser = new JSONParser();
+//		JSONObject obj = (JSONObject)parser.parse(jsonAdd.json);
+//		JSONObject studentInfo = (JSONObject)obj.get("info");
+//
+//		System.out.println("studentInfo: " + studentInfo);
+//		
+//		String name = (String) studentInfo.get("name");
+//		String id = (String) studentInfo.get("id");
+//		String age = (String) studentInfo.get("age");
+//
+//		System.out.println("name" + name);
+//		System.out.println("id" + id);
+//		System.out.println("age" + age);
 		
-		jsonObject.put("rows", jObj);
-		String outer = jsonObject.toJSONString();		
 		
-		System.out.println("jsonObject: " + jsonObject);
-		System.out.println("jObj: " + jObj);
-		System.out.println("outer: " + outer);
+//		JsonAdd jsonAdd = new JsonAdd();
+//		jsonAdd.jsonGet();
+//		
+//		JSONParser parser = new JSONParser();
+//		JSONObject obj = (JSONObject)parser.parse(jsonAdd.json);
+//		
+//		System.out.println("obj: " + obj);
+//		
+//		JSONObject univ = (JSONObject)obj.get("univ");
+//		System.out.println("univToJSON: " + univ.toJSONString());
+//		System.out.println("univ: " + univ);
+//		
+//		String professor = (String)univ.get("professor");
+//		String student = (String)univ.get("student");
+//		System.out.println("professor: " + professor);
+//		System.out.println("student: " + student);
 		
-		JSONParser parser = new JSONParser();
-		JSONObject obj = (JSONObject)parser.parse(outer);
-		JSONObject rows = (JSONObject)obj.get("rows");
-		String sectKey = (String) obj.get("sectKey");
-		String email = (String) obj.get("email");
 		
-		String name = (String) rows.get("name");
-		String gender = (String) rows.get("gender");
-		String age = (String) rows.get("age");
-		String address = (String) rows.get("address");
 		
-		System.out.println("obj: " + obj);
-		System.out.println("sectKey : " + sectKey);
-		System.out.println("email : " + email);
-		System.out.println("rows : " + rows);
-		System.out.println("name" + name);
-		System.out.println("gender" + gender);
-		System.out.println("age" + age);
-		System.out.println("address" + address);
+		
+//		JSONArray cell = new JSONArray();
+//		
+//		for(int i=0; i<3; i++) {
+//			JSONObject userJson = new JSONObject();
+//			userJson.put("userId", "kang"+i);
+//			userJson.put("userName", "강호동"+i);
+//			userJson.put("userHP", "010-3254-1111"+i);
+//			
+//			cell.add(userJson);
+//		}
+		
+		
+//		System.out.println("cell: " + cell);
+//		System.out.println("celltoJSONString: " + cell.toJSONString());
+		
+//		JSONArray returnSchool = (JSONArray)jsonObject.get("school");
+//		for(int i=0;i<cell.size();i++){
+//			System.out.println("i: " + i);
+//			JSONObject returnSubject = (JSONObject) cell.get(i);
+//			String userName = (String)returnSubject.get("userName");
+//			System.out.println("returnSubject: " + returnSubject);		
+//			System.out.println("name: " + userName);
+//		}
+//		
+//		int index = 0;
+//		for(Object el : cell) {
+//			System.out.println("el: " + el);
+//			JSONObject obj = (JSONObject) el.get(index);
+//		}
+		
+//		System.out.println("parser: " + parser.parse(cell);
+		
+		
+		
+		
+		
+		
+//		JSONObject jsonObject = new JSONObject();
+//		jsonObject.put("sectKey", "ziptae.com");
+//		jsonObject.put("email", "thisme@daum.net");
+//		
+//		JSONObject jObj = new JSONObject();
+//		jObj.put("name", "강호동");
+//		jObj.put("gender", "여자");
+//		jObj.put("age", "35");
+//		jObj.put("address", "서울");
+//		
+//		jsonObject.put("rows", jObj);
+//		String outer = jsonObject.toJSONString();		
+//		
+//		System.out.println("jsonObject: " + jsonObject);
+//		System.out.println("jObj: " + jObj);
+//		System.out.println("outer: " + outer);
+//		
+//		JSONParser parser = new JSONParser();
+//		JSONObject obj = (JSONObject)parser.parse(outer);
+//		JSONObject rows = (JSONObject)obj.get("rows");
+//		String sectKey = (String) obj.get("sectKey");
+//		String email = (String) obj.get("email");
+//		
+//		String name = (String) rows.get("name");
+//		String gender = (String) rows.get("gender");
+//		String age = (String) rows.get("age");
+//		String address = (String) rows.get("address");
+//		
+//		System.out.println("obj: " + obj);
+//		System.out.println("sectKey : " + sectKey);
+//		System.out.println("email : " + email);
+//		System.out.println("rows : " + rows);
+//		System.out.println("name" + name);
+//		System.out.println("gender" + gender);
+//		System.out.println("age" + age);
+//		System.out.println("address" + address);
 //		
 		
 //		
