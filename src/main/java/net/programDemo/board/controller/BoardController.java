@@ -206,6 +206,28 @@ public class BoardController {
 		jsonAdd.jsonGet();
 		System.out.println("json: " + jsonAdd.json);
 		
+		JSONParser parser = new JSONParser();
+		JSONObject obj = (JSONObject) parser.parse(jsonAdd.json);
+		System.out.println("obj: " + obj);		
+		
+		JSONArray students = (JSONArray)obj.get("info");
+		System.out.println("students: " + students);
+		
+		for(int i=0; i<students.size(); i++) {
+			System.out.println("i: " + i);
+			JSONObject student = (JSONObject) students.get(i);
+			System.out.println("student: " + student);
+			
+			String name = (String) student.get("name");
+			String id = (String) student.get("id");
+			String age = (String) student.get("age");
+			System.out.println("name: " + name);
+			System.out.println("id: " + id);
+			System.out.println("age: " + age);
+			
+		}
+		
+		
 //		JSONParser parser = new JSONParser();
 //		JSONObject obj = (JSONObject)parser.parse(jsonAdd.json);
 //		JSONObject studentInfo = (JSONObject)obj.get("info");
