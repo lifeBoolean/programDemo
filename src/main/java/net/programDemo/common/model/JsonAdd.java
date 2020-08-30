@@ -29,18 +29,30 @@ public class JsonAdd {
 		student3.put("id", "lee");
 		student3.put("age", "40");
 		
-		JSONArray ary = new JSONArray();
-		ary.add(student1);
-		ary.add(student2);
-		ary.add(student3);
+		JSONArray students = new JSONArray();
+		students.add(student1);
+		students.add(student2);
+		students.add(student3);
 		
-		JSONObject all = new JSONObject();
-		all.put("info", ary);
+		JSONObject professor1 = new JSONObject();
+		professor1.put("name", "김교수");
+		professor1.put("subject", "영어");
 		
-		json = all.toJSONString();
-		System.out.println("json: " + json);
+		JSONObject professor2 = new JSONObject();
+		professor2.put("name", "박교수");
+		professor2.put("subject", "과학");
+		
+		JSONArray professors = new JSONArray();
+		professors.add(professor1);
+		professors.add(professor2);
 		
 		
+		JSONObject allInfo = new JSONObject();
+		allInfo.put("arrStudent", students);
+		allInfo.put("arrProfessors", professors);
+		
+		json = allInfo.toJSONString();
+//		System.out.println("json: " + json);
 		
 	}
 }

@@ -32,11 +32,10 @@ $(document).ready(function(){
             {name:'title', index:'title', align:'center'},
             {name:'writer', index:'writer', align:'center'},
             {name:'regDate', index:'regDate', align:'center'},
-            {name:'hit', index:'hit', align:'center'}
+            {name:'hit', index:'hit', align:'center'},
         ],
         height: 200,
         jsonReader : {
-        	root:'result',
         	repeatitems: false
         },
         pager: '#pager',

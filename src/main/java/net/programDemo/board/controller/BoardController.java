@@ -33,12 +33,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import net.programDemo.board.model.BoardVo;
 import net.programDemo.board.model.Pagination;
 import net.programDemo.board.service.BoardServiceImpl;
+import net.programDemo.common.model.Board;
+import net.programDemo.common.model.JqGrid;
 import net.programDemo.common.model.JsonAdd;
-import net.programDemo.common.model.JsonObj;
 import net.programDemo.util.FileUtils;
 
 
@@ -202,30 +204,91 @@ public class BoardController {
 	@RequestMapping(value = "/jqgrid", method = RequestMethod.GET)
 	public String jqGrid(Model model) throws Exception {
 		
-		JsonAdd jsonAdd = new JsonAdd();
-		jsonAdd.jsonGet();
-		System.out.println("json: " + jsonAdd.json);
+		ArrayList<Board> list = new ArrayList<Board>();
+		list.add(new Board("제목1", "내용1"));
+		list.add(new Board("제목2", "내용2"));
 		
-		JSONParser parser = new JSONParser();
-		JSONObject obj = (JSONObject) parser.parse(jsonAdd.json);
-		System.out.println("obj: " + obj);		
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonStr = mapper.writeValueAsString(list);
+		System.out.println("jsonStr" + jsonStr);
 		
-		JSONArray students = (JSONArray)obj.get("info");
-		System.out.println("students: " + students);
+		System.out.println("================================");
 		
-		for(int i=0; i<students.size(); i++) {
-			System.out.println("i: " + i);
-			JSONObject student = (JSONObject) students.get(i);
-			System.out.println("student: " + student);
-			
-			String name = (String) student.get("name");
-			String id = (String) student.get("id");
-			String age = (String) student.get("age");
-			System.out.println("name: " + name);
-			System.out.println("id: " + id);
-			System.out.println("age: " + age);
-			
-		}
+		ObjectMapper mapper2 = new ObjectMapper();
+		JSONPObject json = new JSONPObject("JSON.parse", list);
+		String jsonStr2 = mapper.writeValueAsString(json);
+		System.out.println("jsonStr: " + jsonStr2);
+		
+		
+//		List<BoardVo> list = boardService.jqGridList();
+//		System.out.println("list: " + list.toString());
+		
+//		JSONObject jsonObject = new JSONObject();
+//		jsonObject.put("list", list);
+//		System.out.println("jsonObject: " + jsonObject);
+		
+		
+		
+		
+		
+//		JsonAdd jsonAdd = new JsonAdd();
+//		System.out.println("jsonAdd: " + jsonAdd.toString());
+//		jsonAdd.jsonGet();
+//		
+//		JSONParser parser = new JSONParser();
+//		JSONObject allInfo = (JSONObject) parser.parse(jsonAdd.json);
+//		System.out.println("allInfo" + allInfo);
+//		
+//		JSONArray arrProfessor = (JSONArray) allInfo.get("arrProfessors");
+//		System.out.println("arrProfessor" + arrProfessor);
+//		for(int i=0; i<arrProfessor.size(); i++) {
+//			JSONObject professor = (JSONObject) arrProfessor.get(i);
+//			System.out.println("professor: " + professor);
+//			String name = (String) professor.get("name");
+//			String subject = (String) professor.get("subject");
+//			System.out.println("name: " + name);
+//			System.out.println("subject: " + subject);			
+//		}
+//		
+//		JSONArray students = (JSONArray) allInfo.get("arrStudent");
+//		for(int i=0; i<students.size(); i++) {
+//			JSONObject student = (JSONObject) students.get(i);
+//			System.out.println("student: " + student);
+//			String name = (String) student.get("name");
+//			String id = (String) student.get("id");
+//			String age = (String) student.get("age");
+//			System.out.println("name: " + name);
+//			System.out.println("id: " + id);
+//			System.out.println("age: " + age);
+//		}
+		
+		
+		
+		
+//		JsonAdd jsonAdd = new JsonAdd();
+//		jsonAdd.jsonGet();
+//		System.out.println("json: " + jsonAdd.json);
+//		
+//		JSONParser parser = new JSONParser();
+//		JSONObject obj = (JSONObject) parser.parse(jsonAdd.json);
+//		System.out.println("obj: " + obj);		
+//		
+//		JSONArray students = (JSONArray)obj.get("info");
+//		System.out.println("students: " + students);
+//		
+//		for(int i=0; i<students.size(); i++) {
+//			System.out.println("i: " + i);
+//			JSONObject student = (JSONObject) students.get(i);
+//			System.out.println("student: " + student);
+//			
+//			String name = (String) student.get("name");
+//			String id = (String) student.get("id");
+//			String age = (String) student.get("age");
+//			System.out.println("name: " + name);
+//			System.out.println("id: " + id);
+//			System.out.println("age: " + age);
+//			
+//		}
 		
 		
 //		JSONParser parser = new JSONParser();
@@ -369,13 +432,32 @@ public class BoardController {
 	
 	@RequestMapping(value = "/viewGrid", method = RequestMethod.POST)
 	@ResponseBody
-	public void viewGrid(BoardVo boardVo, Model model) throws Exception {
+	public Object viewGrid(HttpServletRequest request, HttpServletResponse response, BoardVo boardVo, Model model) throws Exception {
 //	public String jqgrid(HttpServletRequest request, HttpServletResponse response) throws Exception {
 //		@RequestParam(value = "page", required=false) String page,//page : 몇번째 페이지를 요청했는지
 //		@RequestParam(value = "rows", required=false) String rows,//rows : 페이지 당 몇개의 행이 보여질건지
 //		@RequestParam(value = "sidx", required=false) String sidx,//sidx : 소팅하는 기준이 되는 인덱스
 //		@RequestParam(value = "sord", required=false) String sord//sord : 내림차순 또는 오름차순
 //		) {
+		
+		System.out.println("++++++++++++++++++++++++++++++++++++++");
+		JqGrid jqGrid = new JqGrid();
+		List<BoardVo> list = boardService.jqGridList();
+		jqGrid.setList(list);
+//		jqGrid.toString();
+//		System.out.println("++++++++++++++++++++++++++++++++++++++");
+				
+		return jqGrid;
+		
+		
+//		System.out.println("testMsg");
+//		
+//		JSONObject jsonObject = new JSONObject();
+//		jsonObject.put("rows", "a");
+//		response.setContentType("application/x-json; charset=UTF-8");
+//		response.getWriter().print(jsonObject);  System.out.println("### jsonObject : "+jsonObject);
+		
+//		return null;
 		
 //		System.out.println("+++++++++========================================++++++++++");
 //		List<BoardVo> list = boardService.jqGridList();		
