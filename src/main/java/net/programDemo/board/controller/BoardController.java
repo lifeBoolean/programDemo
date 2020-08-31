@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
@@ -204,20 +205,158 @@ public class BoardController {
 	@RequestMapping(value = "/jqgrid", method = RequestMethod.GET)
 	public String jqGrid(Model model) throws Exception {
 		
-		ArrayList<Board> list = new ArrayList<Board>();
-		list.add(new Board("제목1", "내용1"));
-		list.add(new Board("제목2", "내용2"));
+//		ObjectMapper mapper = new ObjectMapper();
+//		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+//		
+//		HashMap<String, Object> map = new HashMap<>();
+//		map.put("name", "kang");
+//		map.put("age", 32);
+//		map.put("job", "baker");
+//		list.add(map);
+//		
+//		map = new HashMap<>();
+//		map.put("name", "hans");
+//		map.put("age", 35);
+//		map.put("job", "fireman");
+//		list.add(map);
+//		
+//		System.out.println("list: " + list);
+//		
+//		String json = mapper.writeValueAsString(list);
+//		System.out.println("json: " + json);
 		
-		ObjectMapper mapper = new ObjectMapper();
-		String jsonStr = mapper.writeValueAsString(list);
-		System.out.println("jsonStr" + jsonStr);
 		
-		System.out.println("================================");
+//		ObjectMapper mapper = new ObjectMapper();
+//		
+//		String jsonStr = "{\"name\" : \"홍길동\", \"age\" : 20}";
+//		Map<String, Object> map = new HashMap<>();
+//		map = mapper.readValue(jsonStr, new TypeReference<Map<String, Object>>(){});
+//		System.out.println("map: " + map);
+//		
+//		String json = mapper.writeValueAsString(map);
+//		System.out.println("json: " + json);
 		
-		ObjectMapper mapper2 = new ObjectMapper();
-		JSONPObject json = new JSONPObject("JSON.parse", list);
-		String jsonStr2 = mapper.writeValueAsString(json);
-		System.out.println("jsonStr: " + jsonStr2);
+//		ObjectMapper mapper = new ObjectMapper();
+//		
+//		Map<String, Object> map = mapper.readValue(new File("d:\\aaa\\user.json"), new TypeReference<Map<String, Object>>() {
+//		});
+//		
+//		System.out.println(map.get("name"));
+//		System.out.println(map.get("age"));
+//		System.out.println(map.get("message"));
+//		
+//		List<Integer> list = (ArrayList<Integer>) map.get("message");
+//		
+//		for(Object msg : list) {
+//			System.out.println(msg);
+//		}
+		
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("name", "kang");
+//		map.put("age", 33);
+//		
+//		List<Object> list = new ArrayList<>();
+//		list.add("msg1");
+//		list.add("msg2");
+//		list.add("msg3");
+//		
+//		map.put("massage", list);
+//		
+//		mapper.writeValue(new File("d:\\aaa\\user.json"), map);
+		
+//		ObjectMapper mapper = new ObjectMapper();
+//		
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("name", "kang");
+//		map.put("age", 33);
+//		
+//		List<Object> list = new ArrayList<>();
+//		list.add("msg1");
+//		list.add("msg2");
+//		list.add("msg3");
+//		
+//		map.put("massage", list);
+//		
+//		mapper.writeValue(new File("d:\\aaa\\user.json"), map);
+		
+		
+//		ObjectMapper mapper = new ObjectMapper();
+//		String jsonStr = "";
+//		
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("name", "kang");
+//		map.put("age", 33);
+//		
+//		jsonStr = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(map);
+//		System.out.println(jsonStr);
+		
+		
+		
+//		ObjectMapper mapper = new ObjectMapper();
+//		String json = "{\"name\" : \"mkyong\", \"age\" : 29, \"messages\" : [\"msg 1\", \"msg 2\", \"msg 3\"]}";
+// 
+//		Map<String, Object> map = new HashMap<>();
+//		map = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+//		System.out.println("map: " + map);
+//		
+//		List list = (ArrayList) map.get("messages");
+//		System.out.println("msg: " + list.get(2));
+		
+//		Map<String, Object> map1 = new HashMap<String, Object>();
+//		map1.put("userId", "kang");
+//		map1.put("userName", "강호동");
+//		map1.put("userAge", 50);
+//		
+//		Map<String, Object> map2 = new HashMap<>();
+//		map2.put("userId", "hans");
+//		map2.put("userName", "한효주");
+//		map2.put("userAge", 40);
+//		
+//		List<Map<String, Object>> list = new ArrayList<>();
+//		list.add(map1);
+//		list.add(map2);
+//		
+//		for(int i=0; i<list.size(); i++) {
+//			Map<String, Object> map = list.get(i);
+//			System.out.println("map: " + map);
+//			
+//			String userId = (String) map.get("userId");
+//			String userName = (String) map.get("userName");
+//			int userAge = (int) map.get("userAge");
+//			System.out.println("userId: " + userId);
+//			System.out.println("userName: " + userName);
+//			System.out.println("userAge: " + userAge);		
+//			
+//		}
+		
+		
+		
+//		ObjectMapper mapper = new ObjectMapper();
+//		String json = "{ \"userId\" : \"kang\", \"userName\" : \"강호동\"}";
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map = mapper.readValue(json, new TypeReference<Map<String, Object>>() {});
+//		
+//		System.out.println("map: " + map);
+//		System.out.println("userId: " + map.get("userId"));
+//		System.out.println("userName: " + map.get("userName"));
+		
+		
+		
+//		ArrayList<Board> list = new ArrayList<Board>();
+//		list.add(new Board("제목1", "내용1"));
+//		list.add(new Board("제목2", "내용2"));
+//		
+//		ObjectMapper mapper = new ObjectMapper();
+//		String jsonStr = mapper.writeValueAsString(list);
+//		System.out.println("jsonStr" + jsonStr);
+//		
+//		System.out.println("================================");
+//		
+//		ObjectMapper mapper2 = new ObjectMapper();
+//		JSONPObject json = new JSONPObject("JSON.parse", list);
+//		String jsonStr2 = mapper.writeValueAsString(json);
+//		System.out.println("jsonStr: " + jsonStr2);
 		
 		
 //		List<BoardVo> list = boardService.jqGridList();
@@ -444,8 +583,10 @@ public class BoardController {
 		JqGrid jqGrid = new JqGrid();
 		List<BoardVo> list = boardService.jqGridList();
 		jqGrid.setList(list);
-//		jqGrid.toString();
-//		System.out.println("++++++++++++++++++++++++++++++++++++++");
+		System.out.println("=======================");		
+		System.out.println(jqGrid.toString());
+		System.out.println("=======================");
+		System.out.println("++++++++++++++++++++++++++++++++++++++");
 				
 		return jqGrid;
 		
