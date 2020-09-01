@@ -204,6 +204,55 @@ public class BoardController {
 	
 	@RequestMapping(value = "/jqgrid", method = RequestMethod.GET)
 	public String jqGrid(Model model) throws Exception {
+	
+//		JSONArray 배열 생성		
+		JSONObject obj1 = new JSONObject();
+		obj1.put("userId", "kang");
+		obj1.put("userName", "강호동");
+		
+		JSONObject obj2 = new JSONObject();
+		obj2.put("userId", "hans");
+		obj2.put("userName", "한효주");
+		
+		JSONArray list = new JSONArray();
+		list.add(obj1);
+		list.add(obj2);
+		
+		System.out.println("list: " + list);
+		
+		for(int i=0; i<list.size(); i++) {
+			Map<String, Object> getObj = (HashMap<String, Object>) list.get(i);
+			String userId = (String) getObj.get("userId");
+			String userName = (String) getObj.get("userName");
+			System.out.println("userId: " + userId);
+			System.out.println("userName: " + userName);
+		}
+		
+		
+		
+		
+//		// JSONObject 객체생성
+//		JSONObject jsonObj = new JSONObject();
+//		jsonObj.put("userId", "hong");
+//		jsonObj.put("userName", "홍길동");
+//
+//		// json 객체에서 value 값 가져오기
+//		String userId = (String) jsonObj.get("userId");
+//		String userName = (String) jsonObj.get("userName");
+//		System.out.println("userId: " + userId);
+//		System.out.println("userName: " + userName);
+//		
+//		// JSONObject 를 String으로 변환
+//		String jsonStr = jsonObj.toJSONString();
+//		
+//		// String을 JSONObject로 변환
+//		JSONParser parser = new JSONParser();
+//		JSONObject obj = (JSONObject) parser.parse(jsonStr);
+//		System.out.println("obj: " + obj);
+//		System.out.println("userId: " + obj.get("userId"));
+//		System.out.println("userName: " + obj.get("userName"));
+		
+		
 		
 //		ObjectMapper mapper = new ObjectMapper();
 //		List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
