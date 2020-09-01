@@ -87,7 +87,7 @@
 		    FROM FREEBOARD
 		    WHERE 1=1		    	
 		    ) FREEBOD
-		
+		WHERE RNUM BETWEEN 11 AND 20
 	</select>
 
 </mapper>
