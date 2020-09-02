@@ -2,6 +2,8 @@ package net.programDemo.board.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,6 +12,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -21,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +38,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import net.programDemo.board.model.BoardVo;
 import net.programDemo.board.model.Pagination;
@@ -42,6 +45,7 @@ import net.programDemo.board.service.BoardServiceImpl;
 import net.programDemo.common.model.Board;
 import net.programDemo.common.model.JqGrid;
 import net.programDemo.common.model.JsonAdd;
+import net.programDemo.common.model.MyValue;
 import net.programDemo.util.FileUtils;
 
 
@@ -203,30 +207,295 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/jqgrid", method = RequestMethod.GET)
-	public String jqGrid(Model model) throws Exception {
-	
-//		JSONArray 배열 생성		
-		JSONObject obj1 = new JSONObject();
-		obj1.put("userId", "kang");
-		obj1.put("userName", "강호동");
+	public String jqGrid(Model model, HttpServletRequest request) throws Exception {
 		
-		JSONObject obj2 = new JSONObject();
-		obj2.put("userId", "hans");
-		obj2.put("userName", "한효주");
+		ObjectMapper mapper = new ObjectMapper();
 		
-		JSONArray list = new JSONArray();
-		list.add(obj1);
-		list.add(obj2);
+		MyValue  myResultObject = new MyValue();
+		myResultObject.userId = "hans";
+		myResultObject.userName= "한효주";
 		
-		System.out.println("list: " + list);
+		String fileName = "result.json";
+		String filePath = "D:\\uploads\\files\\" + fileName; // 파일이 저장될 위치
 		
-		for(int i=0; i<list.size(); i++) {
-			Map<String, Object> getObj = (HashMap<String, Object>) list.get(i);
-			String userId = (String) getObj.get("userId");
-			String userName = (String) getObj.get("userName");
-			System.out.println("userId: " + userId);
-			System.out.println("userName: " + userName);
+		mapper.writeValue(new File(filePath), myResultObject);
+		
+		File file = new File(filePath);
+		if(file.exists()) {
+			System.out.println("파일 있음");
+		} else {
+			System.out.println("파일 없음");
 		}
+		
+		
+		
+//		
+//		// file에서 json형식을 읽어서 객체(Class)에 넣어서 사용
+//		String fileName = "data.json";
+//		String filePath = "D:\\uploads\\files\\" + fileName; // 파일이 저장될 위치
+//		System.out.println(filePath);
+//		
+//		File file = new File(filePath);
+//		if(file.exists()) {
+//			System.out.println("파일 있음");
+//		} else {
+//			System.out.println("파일 없음");
+//		}
+//		
+////		ObjectMapper mapper = new ObjectMapper();
+//		
+//		MyValue myValue = mapper.readValue(new File(filePath), MyValue.class);
+//		
+//		String userId = myValue.userId;
+//		String userName = myValue.userName;
+//		System.out.println("userId: " + userId);
+//		System.out.println("userName: " + userName);
+		
+//		String fileName = "data.json";
+//		Path filePath = Paths.get(File.separatorChar + fileName);
+//		getClass().getResourceAsStream(filePath.toString());
+//		System.out.println(filePath);
+//		System.out.println(getClass().getResourceAsStream(filePath.toString()));
+		
+//		ObjectMapper mapper = new ObjectMapper();
+//		ClassPathResource res = new ClassPathResource("data.json");    
+//		File file = new File(res.getPath());
+//		
+//		MyValue value = mapper.readValue(file, MyValue.class);
+//		System.out.println("value: " + value);
+		
+		
+//		// List<Map<String, Object>를 Json으로 변환
+//		ObjectMapper mapper = new ObjectMapper();
+//		
+//		ArrayList<HashMap<String,Object>> list = new ArrayList<HashMap<String, Object>>();
+//		HashMap<String, Object> map = new HashMap<>();
+//		map.put("userId", "kang");
+//		map.put("userName", "강호동");
+//		list.add(map);
+//		
+//		map = new HashMap<>();
+//		map.put("userId", "hans");
+//		map.put("userName", "한효주");
+//		list.add(map);
+//		
+//		System.out.println("list: " + list);
+//		
+//		String jsonStr = mapper.writeValueAsString(list);
+//		System.out.println("jsonStr: " + jsonStr);
+//		
+//		String jsn = "[{\"age\":\"32\",\"name\":\"steave\",\"job\":\"baker\"},"
+//                + "{\"age\":\"25\",\"name\":\"matt\",\"job\":\"soldier\"}]";
+//		System.out.println("jsn: " + jsn);
+//		
+//		ArrayList<HashMap<String,Object>> jsonList = new ArrayList<HashMap<String, Object>>();
+//		
+//		jsonList = mapper.readValue(jsn, new TypeReference<ArrayList<HashMap<String, Object>>>() {});
+//        
+//        System.out.println("jsonList: " + jsonList);
+
+		
+        
+		
+		
+		
+		
+		
+		
+		
+//		ObjectMapper mapper = new ObjectMapper();
+//		Map<String, Object> map = new HashMap<>();
+//		
+//		String jsonStr = "{\"userName\" : \"강호동\", \"userId\" : \"kang\"}";
+//		map = mapper.readValue(jsonStr, new TypeReference<Map<String, Object>>() {});
+//		System.out.println("map: " + map);
+		
+		
+		
+		
+		
+		
+//		List<Board> list = new ArrayList<>();
+//		list.add(new Board("title1", "content1"));
+//		list.add(new Board("title2", "content2"));		
+//		System.out.println("list: " + list);
+//		
+//		ObjectMapper mapper = new ObjectMapper();
+//		String jsonStr = mapper.writeValueAsString(list);
+//		System.out.println("jsonStr: " + jsonStr);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//		String jsonStr =
+//	        "{"
+//	        +   "\"info1\": {"
+//	        +       "\"title\": \"json 예제1\","
+//	        +       "\"url\": \"https://naver.com/\","
+//	        +       "\"jsp\": false"
+//	        +"  },"
+//	        +   "\"info1\": {"
+//	        +       "\"title\": \"json 예제2\","
+//	        +       "\"url\": \"https://daum.net/\","
+//	        +       "\"jsp\": false"
+//	        +   "}"
+//	        +"}";
+//
+//	    // 가장 큰 JSONObject를 가져옵니다.
+//	    JSONObject jsonObj = new JSONObject();
+//	    JSONParser parser = new JSONParser();
+//	    JSONObject obj = (JSONObject) parser.parse(jsonStr);
+//	    System.out.println("obj: " + obj);
+//	    
+//	    Map<String, Object> info1 = (Map<String, Object>) obj.get("info1");
+//		System.out.println("info1: " + info1);
+//	    
+//	    String title = (String) info1.get("title");
+//	    String url = (String) info1.get("url");
+//	    Boolean jsp = (Boolean) info1.get("jsp");
+//	    System.out.println("title: " + title);
+//	    System.out.println("url: " + url);
+//	    System.out.println("jsp: " + jsp);
+		
+		
+		
+		
+		
+		
+		
+		
+//		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+//		
+//		Map<String, Object> map1 = new HashMap<>();
+//		map1.put("userId", "park");
+//		map1.put("userName", "박찬호");
+//		System.out.println("map1: " + map1);
+//		list.add(map1);
+//		
+//		Map<String, Object> map2 = new HashMap<>();
+//		map2.put("userId", "lees");
+//		map2.put("userName", "이승엽");
+//		System.out.println("map2: " + map2);
+//		list.add(map2);
+//
+//		Map<String, Object> map3 = new HashMap<>();
+//		map3.put("userId", "hans");
+//		map3.put("userName", "한효주");
+//		System.out.println("map3: " + map2);
+//		list.add(map3);
+//		
+//		System.out.println("list: " + list);
+//		
+//		String listStr = list.toString();
+//		System.out.println("listStr: " + listStr);
+//		
+//		// 방법2 : List<Map<String, Object>> 를 Json 으로 변환
+//		JSONArray jsonArr = new JSONArray();
+//		
+//		for(int i=0; i<list.size(); i++) {
+//			JSONObject jsonObj = new JSONObject();
+//			Map<String, Object> user = list.get(i);
+//			System.out.println("user: " + user);
+//			Set<Map.Entry<String, Object>> entries = user.entrySet();
+//			for(Map.Entry<String, Object> entry : entries) {
+//				jsonObj.put(entry.getKey(), entry.getValue());
+//			}
+//			jsonArr.add(jsonObj);			
+			
+//			System.out.println("list: " + list.get(i));
+//			String userId = (String) list.get(i).get("userId");
+//			String userName = (String) list.get(i).get("userName");
+//			System.out.println("userId: " + userId);
+//			System.out.println("userName: " + userName);
+//			jsonObj.put("userId", userId);
+//			jsonObj.put("userName", userName);
+//			jsonArr.add(jsonObj);
+			
+//		}
+//		System.out.println("jsonArr: " + jsonArr);
+//		JSONArray jsonArr = new JSONArray();		
+//		Set<Map.Entry<String, Object>> entries = map1.entrySet();
+//		for(Map.Entry<String, Object> entry : entries) {
+//			System.out.println("key: " + entry.getKey());
+//			System.out.println("value: " + entry.getValue());
+//		}
+		
+		
+		
+		
+		
+//		// 방법1 : List<Map<String, Object>> 를 Json 으로 변환
+//		JSONArray jsonArr = new JSONArray();
+//		
+//		for(int i=0; i<list.size(); i++) {
+//			JSONObject jsonObj = new JSONObject();
+//			System.out.println("list: " + list.get(i));
+//			String userId = (String) list.get(i).get("userId");
+//			String userName = (String) list.get(i).get("userName");
+//			System.out.println("userId: " + userId);
+//			System.out.println("userName: " + userName);
+//			jsonObj.put("userId", userId);
+//			jsonObj.put("userName", userName);
+//			jsonArr.add(jsonObj);
+//			
+//		}
+//		System.out.println("jsonArr: " + jsonArr);
+		
+		
+//		JSONObject jsonObj = new JSONObject();
+//		JSONObject listObj = jsonObj.
+
+		
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("userId", "park");
+//		map.put("userName", "박찬호");
+//		System.out.println("map: " + map);		
+//		
+//		JSONObject json = new JSONObject(map);
+//		System.out.println("json: " + json);	
+//
+//		String jsonStr = json.toString();
+//		System.out.println("jsonStr: " + jsonStr);
+//
+//		JSONParser parser = new JSONParser();
+//		JSONObject jsonObj = (JSONObject) parser.parse(jsonStr);
+//		System.out.println("jsonObj: " + jsonObj);
+		
+		
+		
+		
+		
+		
+////		JSONArray 배열 생성		
+//		JSONObject obj1 = new JSONObject();
+//		obj1.put("userId", "kang");
+//		obj1.put("userName", "강호동");
+//		
+//		JSONObject obj2 = new JSONObject();
+//		obj2.put("userId", "hans");
+//		obj2.put("userName", "한효주");
+//		
+//		JSONArray list = new JSONArray();
+//		list.add(obj1);
+//		list.add(obj2);
+//		
+//		System.out.println("list: " + list);
+//		
+//		for(int i=0; i<list.size(); i++) {
+//			Map<String, Object> getObj = (HashMap<String, Object>) list.get(i);
+//			String userId = (String) getObj.get("userId");
+//			String userName = (String) getObj.get("userName");
+//			System.out.println("userId: " + userId);
+//			System.out.println("userName: " + userName);
+//		}
 		
 		
 		
