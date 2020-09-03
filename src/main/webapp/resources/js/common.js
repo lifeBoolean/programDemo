@@ -8,4 +8,27 @@ $(document).ready(function(){
 		}
 	})
 	
+	
+	
+	
+
+	
 })
+
+
+var obj = {"userId": "kim", "userName": "hans"}; 
+	function test() {
+		$.ajax({ 
+			url: "test",
+			type: "post", 
+			data: JSON.stringify(obj), 
+			dataType: "json", 
+			contentType: "application/json", 
+			success: function(data) { 
+				console.log(data); 
+			}, 
+			error: function(errorThrown) { 
+				console.log(errorThrown.statusText);
+			} 
+		});
+	}

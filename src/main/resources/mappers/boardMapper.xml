@@ -83,11 +83,12 @@
 		        FREEBOD.HIT
 		FROM (
 		    SELECT FREEBOARD.*,
-		        ROW_NUMBER() OVER(ORDER BY IDX ASC) RNUM 
+		        ROW_NUMBER() OVER(ORDER BY IDX DESC) RNUM 
 		    FROM FREEBOARD
 		    WHERE 1=1		    	
 		    ) FREEBOD
-		WHERE RNUM BETWEEN 11 AND 20
+		ORDER BY RNUM
+		<!-- WHERE RNUM BETWEEN 11 AND 20 -->
 	</select>
 
 </mapper>

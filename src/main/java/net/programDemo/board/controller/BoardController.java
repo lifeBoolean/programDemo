@@ -225,21 +225,14 @@ public class BoardController {
 			System.out.println("파일 있음");
 		} else {
 			System.out.println("파일 없음");
-		}
-	
+		}	
 		
 		return "/board/jqgrid";
 	}
 	
 	@RequestMapping(value = "/viewGrid", method = RequestMethod.POST)
 	@ResponseBody
-	public Object viewGrid(HttpServletRequest request, HttpServletResponse response, BoardVo boardVo, Model model) throws Exception {
-//	public String jqgrid(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		@RequestParam(value = "page", required=false) String page,//page : 몇번째 페이지를 요청했는지
-//		@RequestParam(value = "rows", required=false) String rows,//rows : 페이지 당 몇개의 행이 보여질건지
-//		@RequestParam(value = "sidx", required=false) String sidx,//sidx : 소팅하는 기준이 되는 인덱스
-//		@RequestParam(value = "sord", required=false) String sord//sord : 내림차순 또는 오름차순
-//		) {
+	public Object viewGrid(BoardVo boardVo, Model model) throws Exception {
 		
 		System.out.println("++++++++++++++++++++++++++++++++++++++");
 		JqGrid jqGrid = new JqGrid();
@@ -250,168 +243,7 @@ public class BoardController {
 		System.out.println("=======================");
 		System.out.println("++++++++++++++++++++++++++++++++++++++");
 				
-		return jqGrid;
-		
-		
-//		System.out.println("testMsg");
-//		
-//		JSONObject jsonObject = new JSONObject();
-//		jsonObject.put("rows", "a");
-//		response.setContentType("application/x-json; charset=UTF-8");
-//		response.getWriter().print(jsonObject);  System.out.println("### jsonObject : "+jsonObject);
-		
-//		return null;
-		
-//		System.out.println("+++++++++========================================++++++++++");
-//		List<BoardVo> list = boardService.jqGridList();		
-//		System.out.println("list: " + list);
-//		JSONObject oList = new JSONObject();
-//		oList.put("rows", list);
-//		String sendJson = oList.toJSONString(); 
-//		
-//		System.out.println("rowsJson: " + sendJson);
-		
-		
-//		return list;
-		
-//		JSONObject jsonObject = new JSONObject();            // Json 데이터를 담을 객체들 생성
-//        JSONArray cell = new JSONArray();
-//        BoardVo data = null;
-//       
-//        for(int i=0; i<list.size(); i++) {               // 리스트를 돌려가며 데이터 빈에 저장
-//            data = (BoardVo) list.get(i);         
-//         
-//            JSONObject obj = new JSONObject();
-//           
-//            // 그리드에서 읽을 값을 key로 지정
-//            // Json 객체에 담을 데이터를 차곡차곡 저장
-//            obj.put( "idx" , data.getIdx());
-//            obj.put( "title" , data.getTitle());
-//            obj.put( "writer" , data.getWriter());            
-//            obj.put( "regDate"  ,data.getRegDate());
-//            obj.put( "hit" , data.getHit());
-//                           
-//            cell.add(obj);  
-//        }  
-//       
-//        jsonObject.put("rows", cell);
-//        response.setContentType("application/x-json; charset=UTF-8");
-//        response.getWriter().print(jsonObject);  System.out.println("### jsonObject : "+jsonObject);
-//       
-//        // 리턴값은 반드시 null ! 리턴값을 주면 그리드가 인식하지 못함.
-//        return null;
-		
-//		System.out.println("여기에 들어오긴함?");
-//		// 그리드에 뿌려주려는 데이터를 DB에서나 어디에서 가져온다.
-//		JsonObj obj = new JsonObj();
-//		
-//		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
-//
-//		int int_page = Integer.parseInt(page);// 1 2 3
-//		int perPageNum = (int)Double.parseDouble(rows);
-//		
-//		
-//		// db에서 가져온 데이터의 갯수가 10개라고 가정하고 임의로 수행한다. 그럼 이 키값들을 멤버로 하는 클래스를 가지고 있어야 할 것같다..
-//		for(int i= (int_page-1)*perPageNum+1 ; i<(int_page*perPageNum) ; i++){
-//			Map<String, Object> map = new HashMap<String, Object>();
-//			
-//			map.put("id", new String(""+i));
-//			map.put("invdate", new String("날짜"+i));
-//			map.put("name", new String("이름"+i));
-//			map.put("amount", new String("양"+i));
-//			map.put("txt", new String("텍스트"+i));
-//			
-//			list.add(map);
-//		}
-		
-		
-		
-		
-		
-		// 그리고 이 JsonObj를 리턴해주면 @ResponseBody 애노테이션 그리고 Jackson라이브러리에 의해
-		// json타입으로 페이지에 데이터가 뿌려지게 된다.
-	       
-//	    obj.setRows(list);  // list<map>형태의 받아온 데이터를 가공해서 셋( 그리드에 뿌려줄 행 데이터들 )
-//	    	    
-//	    //page : 현재 페이지
-//	    obj.setPage(int_page);// 현재 페이지를 매개변수로 넘어온 page로 지정해준다. 
-//		
-//	    //records : 보여지는 데이터 개수
-//	    obj.setRecords(list.size());//?
-//		
-//	    //total : rows에 의한 총 페이지수
-//		// 총 페이지 갯수는 데이터 갯수 / 한페이지에 보여줄 갯수 이런 식
-//		int totalPage = (int)Math.ceil(list.size()/Double.parseDouble(rows));
-//		obj.setTotal( totalPage ); // 총 페이지 수 (마지막 페이지 번호)
-//
-//	    return obj;
-		
-		
-//		JSONObject jsonObject = new JSONObject();
-//		JSONArray cell = new JSONArray();
-//		
-//		List<BoardVo> list = boardService.jqGridList();
-//		
-//		Map
-//		map.put("list", list);
-		
-//		cell.add(list);
-//		System.out.println("CELL: " + cell);
-//		
-//		jsonObject.put("rows", cell);
-//		response.setContentType("application/x-json; charset=UTF-8");
-//		response.getWriter().print(jsonObject);
-//		
-//		System.out.println("### list : " + list);
-//		System.out.println("### jsonObject : " + jsonObject);
-		
-//		return list;
-		
-		
-//		JSONObject jsonObject = new JSONObject();
-//		JSONArray cell = new JSONArray();
-//		
-//		
-//		JSONObject obj = new JSONObject();
-//		obj.put("idx", 1);
-//		obj.put("title", "제목");
-//		obj.put("writer", "작성자");
-//		obj.put("regDate", "20-08-02");
-//		obj.put("hit", 11);
-//		
-//		cell.add(obj);
-//		System.out.println("CELL: " + cell);
-//		
-//		jsonObject.put("rows", cell);
-//		response.setContentType("application/x-json; charset=UTF-8");
-//		response.getWriter().print(jsonObject);
-//		
-//		System.out.println("### obj : " + obj);
-//		System.out.println("### jsonObject : " + jsonObject);
-//		
-//		
-//		return null;
-		
-		
-		
-//		String jsonStr = jObj.toJSONString();
-//		System.out.print(jsonStr);
-		
-//		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-//		
-//		Map<String, Object> map = new HashMap();
-//		map.put("idx", 1);
-//		map.put("title","제목");
-//		map.put("writer", "작성자");
-//		map.put("regDate", "20-08-02");
-//		map.put("hit", 11);
-//		
-//		list.add(map);
-		
-//		List<BoardVo> list = boardService.jqGridList();
-		
-		
-		
+		return jqGrid;		
 
 	}
 	

@@ -11,14 +11,14 @@
 	<link rel="stylesheet" href="<c:url value="/resources/js/jqgrid/css/ui.jqgrid.css"/>" />	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>	
 	<script src="<c:url value="/resources/js/common.js"/>"></script>
-	<script src="<c:url value="/resources/js/jqgridDemo.js"/>"></script>
+	<script src="<c:url value="/resources/js/jqgridTest.js"/>"></script>
 	<script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
 	<script src="<c:url value="/resources/js/jqgrid/js/i18n/grid.locale-kr.js"/>"></script>
 	<script src="<c:url value="/resources/js/jqgrid/js/jquery.jqGrid.min.js"/>"></script>
 </head>
 <body>
 
-	<h3>jqgrid 데모1</h3>
+	<h3>jqgrid 데모2</h3>
 
 	<div class="row">
         <table id="list"></table><br>

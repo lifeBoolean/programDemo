@@ -6,9 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
+	<link rel="stylesheet" href="<c:url value="/resources/css/common.css"/>" />	
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="<c:url value="/resources/js/common.js"/>"></script>
 </head>
 <body>
-	
+	<button type="button" onClick="test();">전송</button>
 	<h1>
 		Hello world!  2222
 	</h1>
