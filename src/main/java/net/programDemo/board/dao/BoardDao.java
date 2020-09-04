@@ -16,6 +16,8 @@ public interface BoardDao {
 	BoardVo readOneBoard(int idx) throws Exception;
 	
 	int modifyBoard(BoardVo boardVo) throws Exception;
+
+	int deleteBoard(int idx) throws Exception;
 	
 	public void insertFile(Map<String, Object> map) throws Exception;
 	

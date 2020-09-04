@@ -22,6 +22,10 @@ public interface BoardService {
 	
 	List<Map<String, Object>> selectFileList(int idx) throws Exception;
 	
-	List<BoardVo> jqGridList() throws Exception;
+	List<BoardVo> jqGridList(BoardVo boardVo) throws Exception;
+	
+	void gridModify(String paramData, BoardVo boardVo) throws Exception;
+	
+	void gridDelete(String paramData, BoardVo boardVo) throws Exception;
 	
 }

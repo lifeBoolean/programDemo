@@ -46,6 +46,12 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	@Override
+	public int deleteBoard(int idx) throws Exception {
+		System.out.println("Dao idx: " + idx);
+		return session.delete("boardMapper.delete", idx);
+	}
+	
+	@Override
 	public void insertFile(Map<String, Object> map) throws Exception {
 		session.insert("boardMapper.insertFile", map);
 	}

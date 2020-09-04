@@ -24,10 +24,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -209,24 +211,7 @@ public class BoardController {
 	@RequestMapping(value = "/jqgrid", method = RequestMethod.GET)
 	public String jqGrid(Model model, HttpServletRequest request) throws Exception {
 		
-		ObjectMapper mapper = new ObjectMapper();
-		
-		MyValue  myResultObject = new MyValue();
-		myResultObject.userId = "hans";
-		myResultObject.userName= "한효주";
-		
-		String fileName = "result.json";
-		String filePath = "D:\\uploads\\files\\" + fileName; // 파일이 저장될 위치
-		
-		mapper.writeValue(new File(filePath), myResultObject);
-		
-		File file = new File(filePath);
-		if(file.exists()) {
-			System.out.println("파일 있음");
-		} else {
-			System.out.println("파일 없음");
-		}	
-		
+				
 		return "/board/jqgrid";
 	}
 	
@@ -236,15 +221,25 @@ public class BoardController {
 		
 		System.out.println("++++++++++++++++++++++++++++++++++++++");
 		JqGrid jqGrid = new JqGrid();
-		List<BoardVo> list = boardService.jqGridList();
+		List<BoardVo> list = boardService.jqGridList(boardVo);
 		jqGrid.setList(list);
 		System.out.println("=======================");		
-		System.out.println(jqGrid.toString());
+		System.out.println("jqGrid.toString(): " + jqGrid.toString());
 		System.out.println("=======================");
 		System.out.println("++++++++++++++++++++++++++++++++++++++");
 				
-		return jqGrid;		
-
+		return jqGrid;
+	}
+		
+	@ResponseBody
+	@RequestMapping(value = "/gridDelete", method = RequestMethod.POST)
+	public void deleteGridPost(@RequestBody String paramData, BoardVo boardVo) throws Exception {
+//		response.setCharacterEncoding("UTF-8");
+		System.out.println("paramData: " + paramData);		
+	    
+	    boardService.gridDelete(paramData, boardVo);
+		
+//		return null;
 	}
 	
 	

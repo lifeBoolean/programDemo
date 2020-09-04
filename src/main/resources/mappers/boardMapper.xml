@@ -51,6 +51,12 @@
 			CONTENT = #{content}
 		WHERE IDX = #{idx}
 	</update>
+
+	<update id="delete" parameterType="int">
+		UPDATE FREEBOARD SET 
+			STATUS = 'N'
+		WHERE IDX = #{idx}
+	</update>
 	
 	<insert id="insertFile" parameterType="hashMap">
 		INSERT INTO FREEBOARD_FILES(
@@ -72,7 +78,7 @@
     	SELECT FILE_NO, ORG_FILE_NAME, ROUND(FILE_SIZE/1024, 1) AS FILE_SIZE
     	FROM FREEBOARD_FILES
     	WHERE IDX = #{idx}
-    	AND DEL_GB = 'N'    	
+    	AND DEL_GB = 'N'
     </select>
     
     <select id="selectJqList" resultType="net.programDemo.board.model.BoardVo" >
@@ -80,14 +86,16 @@
 		        FREEBOD.TITLE,
 		        FREEBOD.WRITER,
 		        FREEBOD.REGDATE,
-		        FREEBOD.HIT
+		        FREEBOD.HIT,
+		        FREEBOD.STATUS
 		FROM (
 		    SELECT FREEBOARD.*,
 		        ROW_NUMBER() OVER(ORDER BY IDX DESC) RNUM 
 		    FROM FREEBOARD
-		    WHERE 1=1		    	
+		    WHERE 1=1 
+		    AND STATUS = 'Y' 
 		    ) FREEBOD
-		ORDER BY RNUM
+		ORDER BY RNUM ASC
 		<!-- WHERE RNUM BETWEEN 11 AND 20 -->
 	</select>
 

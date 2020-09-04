@@ -7,6 +7,7 @@ public class BoardVo {
 	private String content;
 	private String regDate;
 	private int hit;
+	private String status;
 	
 	public int getIdx() {
 		return idx;
@@ -44,4 +45,11 @@ public class BoardVo {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}	
+	
 }

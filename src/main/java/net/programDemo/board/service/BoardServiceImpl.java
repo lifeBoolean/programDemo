@@ -1,11 +1,14 @@
 package net.programDemo.board.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -67,8 +70,39 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectFileList(idx);
 	}
 	
-	public List<BoardVo> jqGridList() throws Exception {
+	public List<BoardVo> jqGridList(BoardVo boardVo) throws Exception {
 		
 		return boardDao.jqGridList();
 	}
+	
+	public void gridDelete(String paramData, BoardVo boardVo) throws Exception {
+		
+		JSONParser parser = new JSONParser(); //–JSON Parser 생성
+	    JSONObject jsonObj = (JSONObject)parser.parse(paramData); //– 넘어온 문자열을 JSON 객체로 변환
+	    System.out.println("jsonObj: " + jsonObj);
+	    
+	    List list = (ArrayList) jsonObj.get("data");
+	    System.out.println("list: " + list);
+	    
+	    for(int i=0; i<list.size(); i++) {
+	    	JSONObject boardVoList = (JSONObject) list.get(i);
+	    	System.out.println("listGET: " + boardVoList);
+	    	int idx = Integer.parseInt((String) boardVoList.get("idx"));
+	    	System.out.println("idx: " + idx);
+	    	boardVo.setIdx(idx);
+	    	System.out.println("getIdx: " + boardVo.getIdx());
+	    	boardDao.deleteBoard(idx);
+	    	
+	    }
+	    
+		
+	}
+	
+	public void gridModify(String paramData, BoardVo boardVo) throws Exception {
+		
+		
+		
+		
+	}
+	
 }
