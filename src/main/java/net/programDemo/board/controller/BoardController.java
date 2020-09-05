@@ -233,13 +233,15 @@ public class BoardController {
 		
 	@ResponseBody
 	@RequestMapping(value = "/gridDelete", method = RequestMethod.POST)
-	public void deleteGridPost(@RequestBody String paramData, BoardVo boardVo) throws Exception {
+	public String deleteGridPost(@RequestBody String paramData, BoardVo boardVo) throws Exception {
 //		response.setCharacterEncoding("UTF-8");
-		System.out.println("paramData: " + paramData);		
+//		System.out.println("paramData: " + paramData);		
 	    
-	    boardService.gridDelete(paramData, boardVo);
+	    int n = boardService.gridDelete(paramData, boardVo);
+	    
+	    String jsonStr = "{\"msg\":\""+n+"\"}";
 		
-//		return null;
+		return jsonStr;
 	}
 	
 	

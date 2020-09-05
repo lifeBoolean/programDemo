@@ -75,11 +75,13 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.jqGridList();
 	}
 	
-	public void gridDelete(String paramData, BoardVo boardVo) throws Exception {
+	public int gridDelete(String paramData, BoardVo boardVo) throws Exception {
 		
 		JSONParser parser = new JSONParser(); //–JSON Parser 생성
 	    JSONObject jsonObj = (JSONObject)parser.parse(paramData); //– 넘어온 문자열을 JSON 객체로 변환
 	    System.out.println("jsonObj: " + jsonObj);
+	    
+	    int n = 0;
 	    
 	    List list = (ArrayList) jsonObj.get("data");
 	    System.out.println("list: " + list);
@@ -92,8 +94,10 @@ public class BoardServiceImpl implements BoardService {
 	    	boardVo.setIdx(idx);
 	    	System.out.println("getIdx: " + boardVo.getIdx());
 	    	boardDao.deleteBoard(idx);
-	    	
+	    	n++;
 	    }
+	    
+	    return n;
 	    
 		
 	}

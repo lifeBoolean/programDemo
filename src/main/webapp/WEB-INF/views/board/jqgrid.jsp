@@ -36,14 +36,20 @@
 	<h3>jqgrid 데모1</h3>
 
 	<div class="row">
-        <table id="list"></table><br>
-        <p>페이징</p>
-        <div id="pager"></div>
+        <table id="list"></table><br>        
+        <!-- <div id="pager"></div> -->
     </div>
     
-    <button type="submit" id="deleteBtn">삭제</button>
+    <button type="submit" id="deleteBtn">삭제</button><br>
     
-    
+    //데이터가 없을 경우 메세지를 띄울 태그
+	<div id="NoData"></div>
+	 
+	// 그리드에 적용되있는 페이징 태그
+	<div id="pager"></div>    
+	 
+	// 새롭게 구현할 커스텀 페이징 태그
+	<div id="paginate"></div>
     
     
     

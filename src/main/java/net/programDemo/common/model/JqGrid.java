@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JqGrid {
 	
-//	@JsonProperty("page")
-//	private int page = 1;
-//	
-//	@JsonProperty("records")
-//	private int records = 20;
-//	
-//	@JsonProperty("total")
-//	private int total = 30;
+	@JsonProperty("page")
+	private int page = 1;
+	
+	@JsonProperty("records")
+	private int records = 20;
+	
+	@JsonProperty("total")
+	private int total = 30;
 	
 	@JsonProperty("rows")
 	private Object list;

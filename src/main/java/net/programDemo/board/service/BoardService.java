@@ -26,6 +26,6 @@ public interface BoardService {
 	
 	void gridModify(String paramData, BoardVo boardVo) throws Exception;
 	
-	void gridDelete(String paramData, BoardVo boardVo) throws Exception;
+	int gridDelete(String paramData, BoardVo boardVo) throws Exception;
 	
 }
