@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="membersMapper">
+
+	<insert id="memberInsert">
+		INSERT INTO MEMBERS ( USERID
+							, USERPW
+							, USERNAME
+							, REGDATE) 
+					VALUES(	#{userId}
+							, #{userPw}
+							, #{userName}
+							, SYSDATE)
+	</insert>
+	
+	<select id="login" resultType="net.programDemo.model.MembersVo">
+		SELECT USERID, USERPW, USERNAME
+		  FROM MEMBERS
+		 WHERE USERID = #{userId}
+		   AND USERPW = #{userPw}
+	</select>
+	
+	<update id="modifyMember">
+		UPDATE MEMBERS SET
+			USERNAME = #{userName}
+		WHERE USERID = #{userId}
+	</update>
+	
+	<delete id="deleteMember">
+		DELETE FROM MEMBERS
+		WHERE USERID = #{userId}
+		AND USERPW = #{userPw}
+	</delete>
+
+	
+</mapper>

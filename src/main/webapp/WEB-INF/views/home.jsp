@@ -11,7 +11,9 @@
 	<script src="<c:url value="/resources/js/common.js"/>"></script>
 </head>
 <body>
-	<button type="button" onClick="test();">전송</button>
+	<div>
+		<%@include file="nav.jsp"%>
+	</div>
 	<h1>
 		Hello world!  2222
 	</h1>
@@ -19,22 +21,27 @@
 	<P>  The time on the server is ${serverTime}. </P>
 	
 	
-	<c:if test="${user == null }">
+	<c:if test="${member == null}">
 	<div>
-		<a href="${pageContext.request.contextPath}/user/join">회원가입</a>
-		<a href="${pageContext.request.contextPath}/user/login">로그인</a>
+		<a href="${pageContext.request.contextPath}/member/join">회원가입</a>
+		<a href="${pageContext.request.contextPath}/member/login">로그인</a>
 	</div>
 	</c:if>
 	
-	<c:if test="${user != null}">
+	<c:if test="${member != null}">
 	<div>
-		<p>${user.userName}(${user.userId})님 환영합니다.</p>
-		<a href="${pageContext.request.contextPath}/user/modify">정보수정</a>
-		<a href="${pageContext.request.contextPath}/user/logout">로그아웃</a>
+		<p>${member.userName}(${member.userId})님 환영합니다.</p>
+		<a href="${pageContext.request.contextPath}/member/modify">정보수정</a>
+		<a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
+	<p><a href="${pageContext.request.contextPath}/member/delete">회원탈퇴</a></p>
 	</div>
 	</c:if>
 	<c:if test="${msg == false}">
 		<p>로그인 실패</p>
+	</c:if>
+	
+	<c:if test="${msg == false}">
+		<p>탈퇴실패 비번 틀림</p>
 	</c:if>
 	
 	<p>

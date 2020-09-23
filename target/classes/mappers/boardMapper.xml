@@ -29,7 +29,7 @@
 		SELECT COUNT(*) 
 		FROM FREEBOARD
 		WHERE 1=1
-			<include refid="search"></include>
+		<include refid="search"></include>
 	</select>
 	
 	<sql id="search">

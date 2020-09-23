@@ -32,6 +32,7 @@
 	
 	
 	
+	<context:component-scan base-package="net.programDemo" />	
 	<context:component-scan base-package="net.programDemo.demo" />	
 	<context:component-scan base-package="net.programDemo.board" />	
 	<context:component-scan base-package="net.programDemo.util" />	
